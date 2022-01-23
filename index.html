@@ -25,6 +25,18 @@
 			<div class="progress-bar-fill" id="progress-bar-fill"></div>
 		</div>
 		<script>
+			function saveDates()
+			{
+				localStorage.setItem("startdate", document.getElementById("startdate").value)
+				localStorage.setItem("enddate", document.getElementById("enddate").value)
+			}
+
+			function loadDates()
+			{
+				document.getElementById("startdate").value = localStorage.getItem("startdate")
+				document.getElementById("enddate").value = localStorage.getItem("enddate")
+			}
+
 			function calcProgress()
 			{
 				const startCal = document.getElementById("startdate").value.split("-")
@@ -61,13 +73,18 @@
 
 			document.getElementById("startdate").addEventListener("change", function()
 			{
+				saveDates()
 				updateProgress(calcProgress())
 			})
 
 			document.getElementById("enddate").addEventListener("change", function()
 			{
+				saveDates()
 				updateProgress(calcProgress())
 			})
+
+			loadDates()
+			updateProgress(calcProgress())
 		</script>
 	</body>
 </html>
