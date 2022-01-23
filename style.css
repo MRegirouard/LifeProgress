@@ -28,10 +28,77 @@ h1
 	font-size: min(8vh, 8vw);
 }
 
+h2
+{
+	font-size: 5vh;
+	height: 70%;
+	text-align: center;
+}
+
 div.header
 {
 	background-color: #2ba1be;
 	width: 100%;
 	height: 30vh;
 	margin-bottom: 10px;
+}
+
+div.dates
+{
+	display: flex;
+	padding: 20px;
+}
+
+div.date
+{
+	width: 50%;
+	color: white;
+	padding: 10px;
+}
+
+input[type=date]
+{
+	color: white;
+	font-size: 3vh;
+	margin: 0 auto;
+	display: block;
+	height: auto;
+}
+
+::-webkit-calendar-picker-indicator
+{
+	background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 24"><path fill="%23bbbbbb" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>');
+}
+
+div.progress-bar
+{
+	width: 90%;
+	height: 10vh;
+	margin: 0 auto;
+	background-color: #1d1e1f;
+	border-radius: 1vh;
+}
+
+div.progress-bar-fill
+{
+	background-color: green;
+	width: 0%;
+	height: 10vh;
+	line-height: 10vh;
+	text-align: center;
+	font-size: 5vh;
+	border-radius: 1vh;
+}
+
+@media screen and (max-width: 700px)
+{
+	div.date
+	{
+		width: 100%;
+	}
+
+	div.dates
+	{
+		flex-direction: column;
+	}
 }

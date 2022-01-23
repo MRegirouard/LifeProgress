@@ -10,5 +10,64 @@
 		<div class="header">
 			<h1>Life Progress Bar</h1>
 		</div>
+		<div class="dates">
+			<div class="date start">
+				<h2>Birth Date</h2>
+				<input type="date" id="startdate" class="date">
+			</div>
+			<div class="date end">
+				<h2>Estimated Death Date</h2>
+				<input type="date" id="enddate" class="date">
+			</div>
+		</div>
+		<h2>Your Life</h2>
+		<div class="progress-bar">
+			<div class="progress-bar-fill" id="progress-bar-fill"></div>
+		</div>
+		<script>
+			function calcProgress()
+			{
+				const startCal = document.getElementById("startdate").value.split("-")
+				const endCal = document.getElementById("enddate").value.split("-")
+
+				const startDate = new Date()
+				startDate.setFullYear(startCal[0])
+				startDate.setMonth(startCal[1] - 1)
+				startDate.setDate(startCal[2])
+
+				const endDate = new Date();
+				endDate.setFullYear(endCal[0])
+				endDate.setMonth(endCal[1] - 1)
+				endDate.setDate(endCal[2])
+
+				const diff = endDate - startDate
+				const now = new Date()
+				return (now - startDate) / diff * 100
+			}
+
+			function updateProgress(progress)
+			{
+				if (progress < 0 || typeof progress !== "number")
+					progress = 0
+				else if (progress > 100)
+					progress = 100
+
+				var progressBar = document.getElementById("progress-bar-fill")
+				progressBar.style.width = Math.round(progress) + "%"
+
+				if (progress > 0)
+					progressBar.innerHTML = Math.round(progress) + "%"
+			}
+
+			document.getElementById("startdate").addEventListener("change", function()
+			{
+				updateProgress(calcProgress())
+			})
+
+			document.getElementById("enddate").addEventListener("change", function()
+			{
+				updateProgress(calcProgress())
+			})
+		</script>
 	</body>
 </html>
