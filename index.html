@@ -24,14 +24,16 @@
 		<div class="progress-bar">
 			<div class="progress-bar-fill" id="progress-bar-fill"></div>
 		</div>
-		<h2>Stats</h2>
-		<ul>
-			<li id="stat-percent">You have lived for 0% of your life.</li>
-			<li id="stat-lived">You have lived for 0 years, 0 months, and 0 days.</li>
-			<li id="stat-will-live">You will live another 0 years, 0 months, and 0 days.</li>
-			<li id="stat-total">You will live a total of 0 years, 0 months, and 0 days.</li>
-			<li id="stat-days-percent">1% of your life is 0 days.</li>
-		</ul>
+		<div id="stats">
+			<h2>Stats</h2>
+			<ul>
+				<li id="stat-percent">You have lived for 0% of your life.</li>
+				<li id="stat-lived">You have lived for 0 years, 0 months, and 0 days.</li>
+				<li id="stat-will-live">You will live another 0 years, 0 months, and 0 days.</li>
+				<li id="stat-total">You will live a total of 0 years, 0 months, and 0 days.</li>
+				<li id="stat-days-percent">1% of your life is 0 days.</li>
+			</ul>
+		</div>
 		<script>
 			function saveDates()
 			{
@@ -101,6 +103,11 @@
 				document.getElementById("stat-will-live").innerHTML = "You will live another " + calcDateDiff(new Date(), endDate) + "."
 				document.getElementById("stat-total").innerHTML = "You will live a total of " + calcDateDiff(startDate, endDate) + "."
 				document.getElementById("stat-days-percent").innerHTML = "1% of your life is " + Math.round(dayCount / 100) + " days."
+
+				if (isNaN(calcProgress()))
+					document.getElementById("stats").style.display = "none"
+				else
+					document.getElementById("stats").style.display = "block"
 			}
 
 			function calcDateDiff(date1, date2)
