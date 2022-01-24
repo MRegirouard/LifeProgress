@@ -24,6 +24,14 @@
 		<div class="progress-bar">
 			<div class="progress-bar-fill" id="progress-bar-fill"></div>
 		</div>
+		<h2>Stats</h2>
+		<ul>
+			<li id="stat-percent">You have lived for 0% of your life.</li>
+			<li id="stat-lived">You have lived for 0 years, 0 months, and 0 days.</li>
+			<li id="stat-will-live">You will live another 0 years, 0 months, and 0 days.</li>
+			<li id="stat-total">You will live a total of 0 years, 0 months, and 0 days.</li>
+			<li id="stat-days-percent">1% of your life is 0 days.</li>
+		</ul>
 		<script>
 			function saveDates()
 			{
@@ -71,20 +79,59 @@
 					progressBar.innerHTML = Math.round(progress) + "%"
 			}
 
+			function updateStats()
+			{
+				const startCal = document.getElementById("startdate").value.split("-")
+				const endCal = document.getElementById("enddate").value.split("-")
+
+				const startDate = new Date()
+				startDate.setFullYear(startCal[0])
+				startDate.setMonth(startCal[1] - 1)
+				startDate.setDate(startCal[2])
+
+				const endDate = new Date();
+				endDate.setFullYear(endCal[0])
+				endDate.setMonth(endCal[1] - 1)
+				endDate.setDate(endCal[2])
+
+				const dayCount = (endDate - startDate) / (1000 * 60 * 60 * 24)
+
+				document.getElementById("stat-percent").innerHTML = "You have lived for " + Math.round(calcProgress() * 100) / 100 + "% of your life."
+				document.getElementById("stat-lived").innerHTML = "You have lived for " + calcDateDiff(startDate, new Date()) + "."
+				document.getElementById("stat-will-live").innerHTML = "You will live another " + calcDateDiff(new Date(), endDate) + "."
+				document.getElementById("stat-total").innerHTML = "You will live a total of " + calcDateDiff(startDate, endDate) + "."
+				document.getElementById("stat-days-percent").innerHTML = "1% of your life is " + Math.round(dayCount / 100) + " days."
+			}
+
+			function calcDateDiff(date1, date2)
+			{
+				let dayCount = (date2 - date1) / (1000 * 60 * 60 * 24)
+				const years = Math.floor(dayCount / 365)
+				dayCount -= years * 365
+				const months = Math.floor(dayCount / 30)
+				dayCount -= months * 30
+				const days = Math.floor(dayCount)
+
+				return years + (years === 1 ? " year, " : " years, ") + months + (months === 1 ? " month, and " : " months, and ") + days + (days === 1 ? " day" : " days")
+			}
+
 			document.getElementById("startdate").addEventListener("change", function()
 			{
 				saveDates()
 				updateProgress(calcProgress())
+				updateStats()
 			})
 
 			document.getElementById("enddate").addEventListener("change", function()
 			{
 				saveDates()
 				updateProgress(calcProgress())
+				updateStats()
 			})
 
 			loadDates()
 			updateProgress(calcProgress())
+			updateStats()
 		</script>
 	</body>
 </html>

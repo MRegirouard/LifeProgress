@@ -33,12 +33,28 @@ h2
 	font-size: 5vh;
 	height: 70%;
 	text-align: center;
+	padding-top: 25px;
 }
 
 a
 {
 	text-decoration: none;
 	color: white;
+}
+
+ul
+{
+	list-style-type: circle;
+	width: 75%;
+	margin: 0 auto;
+}
+
+li
+{
+	font-size: 2.5vh;
+	display: list-item;
+	margin-left: 2em;
+	padding: 3px;
 }
 
 div.header
